@@ -67,8 +67,18 @@
     background: #FBFFC9;
 }
 
+#divNumbers{
+    font-size: 30pt; 
+    font-family: 'Bebas Neue', cursive;
+}
 
-
+#stream{
+    color: rgb(255 181 86);
+    text-shadow: 1px 0 1px #000, 
+                0 1px 1px #000, 
+                -1px 0 1px #000, 
+                0 -1px 1px #000;
+}
 
 
 @media screen and (max-width: 600px) {
