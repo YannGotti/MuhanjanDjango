@@ -6,7 +6,7 @@
     <link  href="{% static 'loto/css/admin.css' %}" rel="stylesheet" type="text/css">
 
 
-    <div id="divNumbers">
+    <div>
         <p id="stream"></p>
     </div>
     
@@ -22,34 +22,10 @@
                 url: "{% url 'get_stream' lobby.pk %}",
                 success: function(result) {
                     var el = document.getElementById("stream");
-                    
-		    let result2 = result['data'];
-		    let result3 = result2.split(' ');
-	    	    console.log(result3);
-		    let ar = [];
-for (let i = 0; i < result3.length; i++) {
-       	    if (isNaN(result3[i])) {
-                 ar.push(`<span class="winner">${result3[i]}</span> `);
-        } else {
-            if (result3[i] > 0 && result3[i] < 10) {
-                ar.push(`<span class="number space">${result3[i]}</span> `);
-            }
-            if (result3[i] > 9 && result3[i] < 91) {
-                ar.push(`<span class="number">${result3[i]}</span> `);
-            }
-            
-        }
-	let text = "";
-	text = ar.join(" ");
-	el.innerHTML = text;
-    }
-		console.log(ar);
+                    el.innerText = result['data'];
                 }
             });
-	    
         };
-
-	
     </script>
 
 {% endblock %}

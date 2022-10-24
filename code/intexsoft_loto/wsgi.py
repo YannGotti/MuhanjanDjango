@@ -1,5 +1,5 @@
 """
-WSGI config for muhanjan_loto project.
+WSGI config for intexsoft_loto project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'muhanjan_loto.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'intexsoft_loto.settings')
 
 application = get_wsgi_application()

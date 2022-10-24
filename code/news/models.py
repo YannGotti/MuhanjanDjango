@@ -1,12 +1,11 @@
-from datetime import datetime
-import base64
+from django.utils import timezone
 from django.db import models
 
 
 class News(models.Model):
     title = models.CharField(max_length=100)
     text = models.TextField()
-    date = models.DateTimeField(default=datetime.now())
+    date = models.DateTimeField(default=timezone.now)
     image = models.TextField(
         db_column='image64',
         blank=True)

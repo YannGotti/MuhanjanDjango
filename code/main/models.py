@@ -1,7 +1,6 @@
-from datetime import datetime
 from django.conf import settings
 from django.db import models
-
+from django.utils import timezone
 
 class Game(models.Model):
     name = models.CharField(max_length=50)
@@ -14,7 +13,7 @@ class Game(models.Model):
 class Lobby(models.Model):
     name = models.CharField(max_length=50)
     max_users = models.IntegerField(default=1)
-    date = models.DateTimeField(default=datetime.now())
+    date = models.DateTimeField(default=timezone.now)
     is_active = models.BooleanField(default=True)
     password = models.CharField(max_length=5, blank=True, null=True)
     creator = models.ForeignKey(

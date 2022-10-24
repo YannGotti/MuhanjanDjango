@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+
+  loto_app:
+    container_name: loto_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - "./code:/app/"
+
+  mysql:
+    image: mysql:latest
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_DATABASE: loto
+      MYSQL_ROOT_PASSWORD: password
+
+  
+  myadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    ports:
+     - 8084:80

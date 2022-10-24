@@ -33,10 +33,12 @@ packages/
 *restart-app
 
 *.pyc
-/muhanjan_loto/main/__pycache__/
-/muhanjan_loto/muhanjan_loto/__pycache__/
-/muhanjan_loto/main/__pycache__/
-/muhanjan_loto/main/migrations/__pycache__/
+/loto/main/__pycache__/
+/loto/loto/__pycache__/
+/loto/intexsoft_loto/__pycache__/
+/loto/news/__pycache__/
+/loto/main/__pycache__/
+/loto/main/migrations/__pycache__/
 __pycache__
 __pycache__/
 *.py[cod]
