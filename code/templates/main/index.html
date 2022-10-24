@@ -3,137 +3,109 @@
 {% load static %}
 {% block content %}
 
-    <section>
-        <link  href="{% static 'main/css/contacts.css' %}" rel="stylesheet" type="text/css">
-        <div class="container-text ">
-            <h1>ДОСТУПНЫЕ ЛОББИ</h1>
-            <h1>NEWS</h1>
-        </div>
+<section>
+    <link href="{% static 'main/css/contacts.css' %}" rel="stylesheet" type="text/css">
+    <div class="container-text ">
+        <h1>ДОСТУПНЫЕ ЛОББИ</h1>
+        <h1>NEWS</h1>
+    </div>
 
-        
-            <div class="container">
-                <div class="games">
-                    {% regroup lobbies by game as games %}
-                    {% for game, lobbies in games %}
-                    <div class="lobbies">
-                        <div class="lobby">
-                            <div class="lobby-text">
-                                <h1>{{ game.name }}</h1>
-                            </div>
-                            <scroll-container class="scrolling-games">
-                                {% for lobby in lobbies %}
-                                <scroll-page>
-                                    <a class="link-game" href="{% url 'enter lobby' lobby.pk %}">
-                                        <div class="title-game">
-                                            <div class="block-game">
-                                                <h1>{{ lobby.name }}</h1>
-                                                <h5>online: {{ lobby.count_users }}/{{ lobby.max_users }}</h5>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    
-                                </scroll-page>
-                                {% endfor %}
-                            </scroll-container>
-                        </div>
+
+    <div class="container">
+        <div class="games">
+            {% regroup lobbies by game as games %}
+            {% for game, lobbies in games %}
+            <div class="lobbies">
+                <div class="lobby">
+                    <div class="lobby-text">
+                        <h1>{{ game.name }}</h1>
                     </div>
-                    {% endfor %}
-                
-                </div>
-                
-                
-                
-                <div class="delimeter"></div>
-
-                <div class="news">
-                    <scroll-container id="news" class="scrolling-news">
-                        {% comment %} <scroll-page>
-                            <div class="title-news">
-                            <img id='news1' src="{% static 'main/images/img.jpg' %}">
-                                <div class="news-text">
-                                    <h3>NAME OF GAME</h3>
-                                    <p>News text... News text... News text... 
-                                        News text... News text... News text... News text...</p>
+                    <scroll-container class="scrolling-games">
+                        {% for lobby in lobbies %}
+                        <scroll-page>
+                            <a class="link-game" href="{% url 'enter lobby' lobby.pk %}">
+                                <div class="title-game">
+                                    <div class="block-game">
+                                        <h1>{{ lobby.name }}</h1>
+                                        <h5>online: {{ lobby.count_users }}/{{ lobby.max_users }}</h5>
+                                    </div>
                                 </div>
-                            </div>
-                        </scroll-page> {% endcomment %}
+                            </a>
+
+                        </scroll-page>
+                        {% endfor %}
                     </scroll-container>
                 </div>
             </div>
+            {% endfor %}
+
         </div>
-        <div class="contacts">
-            <div class="urls">
-                <h2>Тех поддержка</h2>
-                <li>
-                    <a href="https://t.me/mironchikk">Ян Готи</a>
-                </li>
-                <li>
-                    <a href="https://t.me/kekanddosik">КекаНян</a>
-                </li>
-            </div>
-            <div class="urls ">
-                <h2 >Поддержать проект</h2>
-                <li><a href="">Donation</a></li>
-            </div>
 
-            <div class="urls ">
-                <h2 >По вопросам связи</h2>
-                <li>
-                    По всем техническим вопросам обращаться к ян готи.
-                </li>
-                <li>
-                    По вопросам игры обращатся к кеканяну.
-                </li>
-                <li>
-                    Если вы собрали все числа и решили что выйграли, не стоит писать об этом кому либо из администрации, вы не первый кто собрал все числа.
-                </li>
-                <li>
-                    Надеюсь на ваше понимание. Отдельная благодарность maksperskiy.
-                </li>
-            </div>
+
+
+        <div class="delimeter"></div>
+
+        <div class="news">
+            <scroll-container id="news" class="scrolling-news">
+                {% comment %} <scroll-page>
+                    <div class="title-news">
+                        <img id='news1' src="{% static 'main/images/img.jpg' %}">
+                        <div class="news-text">
+                            <h3>NAME OF GAME</h3>
+                            <p>News text... News text... News text...
+                                News text... News text... News text... News text...</p>
+                        </div>
+                    </div>
+                </scroll-page> {% endcomment %}
+            </scroll-container>
         </div>
-    </section>
+    </div>
+    </div>
+    <div class="contacts">
 
-    
+    </div>
+</section>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>
-        
-        get_news()
 
-        function get_news() {
-            var news = document.getElementById('news');
-            $.ajax({
-                url: "{% url 'get_all' %}",
-                success: function(result) {
-                    result["news"].forEach((x) => {
-                        {% comment %} el.setAttribute("src", "data:image/png;base64, " + result["news"][0].image.slice(2,-1)); {% endcomment %}
-                        console.log(result);
-                        var sp = document.createElement("scroll-page");
-                        var dtn = document.createElement("div");
-                        dtn.className = "title-news";
-                        sp.appendChild(dtn);
-                        var img = document.createElement("img");
-                        img.setAttribute("src", "data:image/png;base64, " + x.image.slice(2,-1));
-                        dtn.appendChild(img);
-                        var dnt = document.createElement("div");
-                        dnt.className = "title-text";
-                        var nt = document.createElement("h3");
-                        nt.innerText = x.title;
-                        var ntx = document.createElement("p");
-                        ntx.innerText = x.text.slice(0,100);;
-                        var nd = document.createElement("p");
-                        nd.innerText = (new Date(x.date)).toLocaleDateString("en-GB");
-                        dnt.appendChild(nt);
-                        dnt.appendChild(ntx);
-                        dnt.appendChild(nd);
-                        sp.appendChild(dnt);
 
-                        news.appendChild(sp);
-                    })
-                }
-            });
-        };
-        
-    </script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+
+    get_news()
+
+    function get_news() {
+        var news = document.getElementById('news');
+        $.ajax({
+            url: "{% url 'get_all' %}",
+            success: function (result) {
+                result["news"].forEach((x) => {
+                    {% comment %} el.setAttribute("src", "data:image/png;base64, " + result["news"][0].image.slice(2, -1)); {% endcomment %}
+                    console.log(result);
+                    var sp = document.createElement("scroll-page");
+                    var dtn = document.createElement("div");
+                    dtn.className = "title-news";
+                    sp.appendChild(dtn);
+                    var img = document.createElement("img");
+                    img.setAttribute("src", "data:image/png;base64, " + x.image.slice(2, -1));
+                    dtn.appendChild(img);
+                    var dnt = document.createElement("div");
+                    dnt.className = "title-text";
+                    var nt = document.createElement("h3");
+                    nt.innerText = x.title;
+                    var ntx = document.createElement("p");
+                    ntx.innerText = x.text.slice(0, 100);;
+                    var nd = document.createElement("p");
+                    nd.innerText = (new Date(x.date)).toLocaleDateString("en-GB");
+                    dnt.appendChild(nt);
+                    dnt.appendChild(ntx);
+                    dnt.appendChild(nd);
+                    sp.appendChild(dnt);
+
+                    news.appendChild(sp);
+                })
+            }
+        });
+    };
+
+</script>
 {% endblock %}
