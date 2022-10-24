@@ -23,8 +23,9 @@ services:
     environment:
       MYSQL_DATABASE: loto
       MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - my-datavolume:/var/lib/mysql
 
-  
   myadmin:
     image: phpmyadmin/phpmyadmin:latest
     restart: always
@@ -35,4 +36,7 @@ services:
       PMA_PORT: 3306
       PMA_ARBITRARY: 1
     ports:
-     - 8084:80
+      - 8084:80
+
+volumes:
+  my-datavolume:
